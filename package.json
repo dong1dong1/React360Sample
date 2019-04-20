@@ -1,13 +1,16 @@
 {
   "name": "rt3",
   "version": "0.0.1",
+  "homepage": "https://react360.sureast.com",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-360/scripts/packager.js",
     "bundle": "node node_modules/react-360/scripts/bundle.js",
     "open": "node -e \"require('xopen')('http://localhost:8081/index.html')\"",
     "devtools": "react-devtools",
-    "test": "jest"
+    "test": "jest",
+    "predeploy":"npm run bundle",
+    "deploy":"gh-pages -d build"
   },
   "dependencies": {
     "react": "16.3.2",
@@ -19,6 +22,7 @@
   "devDependencies": {
     "babel-jest": "^19.0.0",
     "babel-preset-react-native": "^1.9.1",
+    "gh-pages": "^2.0.1",
     "jest": "^19.0.2",
     "react-devtools": "^2.5.2",
     "react-test-renderer": "16.0.0",

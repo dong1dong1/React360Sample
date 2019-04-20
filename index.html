@@ -1,13 +1,82 @@
 <html>
-  <head>
-    <title>rt3</title>
-    <style>body { margin: 0; }</style>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  </head>
-  <body>
-    <!-- Attachment point for your app -->
-    <div id="container"></div>
-    <script src="./client.bundle?platform=vr"></script>
+
+<head>
+  <title>React360</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+
+<body>
+  <div id="loading"
+    style="width:100%;height:100%;position:absolute;line-height:500px;text-align:center;display: inline-block;background-color: #ffffff;">
+    loading </div>
+
+  <!-- Attachment point for your app -->
+  <div id="container"></div>
+  <script src="./client.bundle?platform=vr"></script>
+
+
+  <script src="https://unpkg.com/apreload@2.2.4/dist/iife/preload.js"></script>
+  <script>
+    var p = new preload.imageLoad({
+
+      progress: function (i, count) {
+        console.log(Math.floor((i / count) * 100));
+      },
+      timeOut: 15,
+      timeOutCB: function (res) {
+        console.log('timeout=', res);
+      }
+    })
+
+    p.load([
+        'static_assets/earth/earth.obj',
+        'static_assets/earth/earth.mtl',
+        'static_assets/earth/4096_bump.jpg',
+        'static_assets/earth/4096_earth.jpg',
+        // 'static_assets/3d/moon/moon.obj',
+        // 'static_assets/3d/moon/moon.mtl',
+        // 'static_assets/3d/moon/MoonMap2_2500x1250.jpg',
+        // 'static_assets/3d/moon/moon-normal.jpg',
+        // 'static_assets/3d/E45Aircraft/E45Aircraft.obj',
+        // 'static_assets/3d/E45Aircraft/E45Aircraft.mtl',
+        // 'static_assets/3d/E45Aircraft/textures/E-45_glass_nor_.jpg',
+        // 'static_assets/3d/E45Aircraft/textures/E-45_col_3.jpg',
+        // 'static_assets/3d/E45Aircraft/textures/E-45-nor_1.jpg',
+
+      ])
+      .then(function (res) {
+        console.log('first queue=', res);
+        return p.load([
+          'static_assets/sky.jpg',
+          'static_assets/room_360.jpg',
+        ])
+      })
+      .then(function (res) {
+        console.log('second queue=', res);
+
+
+        // Initialize the React 360 application
+        React360.init(
+          'index.bundle?platform=vr&dev=true',
+          document.getElementById('container'), {
+            assetRoot: 'static_assets/',
+          }
+
+        );
+
+        document.getElementById('loading').style.display = 'none';
+
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+  </script>
+  <!--     
     <script>
       // Initialize the React 360 application
       React360.init(
@@ -17,7 +86,7 @@
           assetRoot: 'static_assets/',
         }
       );
-    </script>
-  </body>
-</html>
+    </script> -->
+</body>
 
+</html>

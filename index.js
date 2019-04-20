@@ -6,6 +6,8 @@ import {
   View,
 } from 'react-360';
 
+import EarchModel from './EarchModel';
+
 export default class rt3 extends React.Component {
   render() {
     return (
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     // Fill the entire surface
     width: 1000,
     height: 600,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    // backgroundColor: 'rgba(255, 255, 255, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -40,4 +42,6 @@ const styles = StyleSheet.create({
   },
 });
 
+
 AppRegistry.registerComponent('rt3', () => rt3);
+AppRegistry.registerComponent('EarchModel', () => EarchModel);
