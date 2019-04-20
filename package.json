@@ -10,7 +10,7 @@
     "devtools": "react-devtools",
     "test": "jest",
     "predeploy":"npm run bundle",
-    "deploy":"gh-pages -d build"
+    "deploy":"gh-pages -d build --add=true"
   },
   "dependencies": {
     "react": "16.3.2",
